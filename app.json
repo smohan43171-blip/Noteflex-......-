@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "NoteFlex",
+    "slug": "noteflex",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F8F8F8"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.yourname.noteflex",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "NoteFlex needs photo access to add images to notes.",
+        "NSCameraUsageDescription": "NoteFlex needs camera access to take photos for notes.",
+        "NSMicrophoneUsageDescription": "NoteFlex needs microphone access to record audio notes."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F8F8F8"
+      },
+      "package": "com.yourname.noteflex",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA",
+        "RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow NoteFlex to access your microphone for audio notes."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow NoteFlex to access your photos for image notes.",
+          "cameraPermission": "Allow NoteFlex to use your camera for image notes."
+        }
+      ]
+    ]
+  }
+}
