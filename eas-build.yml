@@ -1,0 +1,44 @@
+name: EAS Build — Android Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:       # also allow manual trigger from GitHub UI
+
+jobs:
+  build:
+    name: Build Android (production)
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────────────
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # ── 2. Node 18 (matches eas.json node version) ──────────
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18.18.0"
+          cache: "npm"
+
+      # ── 3. Install deps (respects .npmrc overrides) ──────────
+      - name: Install dependencies
+        run: npm install
+
+      # ── 4. Install EAS CLI ───────────────────────────────────
+      - name: Install EAS CLI
+        run: npm install -g eas-cli@latest
+
+      # ── 5. Authenticate with Expo ────────────────────────────
+      - name: Expo login
+        run: npx eas-cli whoami
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      # ── 6. Build Android production AAB ──────────────────────
+      - name: EAS Build (Android / production)
+        run: eas build --platform android --profile production --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
