@@ -1,0 +1,13 @@
+# .npmrc — NoteFlex (npm only, no yarn.lock)
+
+# Exact versions — no accidental bumps in CI / EAS
+save-exact=true
+
+# Prevent peer dep conflicts from older RN packages
+legacy-peer-deps=true
+
+# Force React 18.2.0 across all transitive deps
+overrides.react=18.2.0
+
+# Enforce node engine range defined in package.json
+engine-strict=true
